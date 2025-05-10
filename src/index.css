@@ -5,44 +5,44 @@
 
 @layer base {
   :root {
-    --background: 0 0% 7%;
-    --foreground: 0 0% 98%;
+    --background: 220 20% 10%;
+    --foreground: 210 20% 98%;
 
-    --card: 0 0% 12%;
-    --card-foreground: 0 0% 98%;
+    --card: 220 20% 15%;
+    --card-foreground: 210 20% 98%;
 
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 220 20% 10%;
+    --popover-foreground: 210 20% 98%;
 
-    --primary: 213 100% 80%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 213 80% 65%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 17%;
+    --secondary: 215 25% 25%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 17%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 215 25% 20%;
+    --muted-foreground: 220 10% 75%;
 
-    --accent: 0 0% 17%;
+    --accent: 215 25% 25%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 212 100% 70%;
+    --border: 220 15% 25%;
+    --input: 220 15% 25%;
+    --ring: 212 80% 70%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 10%;
+    --sidebar-background: 220 25% 15%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 213 100% 80%;
+    --sidebar-primary: 213 80% 65%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent: 220 25% 20%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 213 100% 70%;
+    --sidebar-border: 220 20% 25%;
+    --sidebar-ring: 213 80% 65%;
   }
 }
 
@@ -62,7 +62,7 @@
   }
   
   .chat-bubble-bot {
-    @apply bg-card p-4 rounded-lg mb-4 text-primary;
+    @apply bg-card p-4 rounded-lg mb-4 text-primary-foreground;
   }
 
   .typing-animation::after {
@@ -90,5 +90,39 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  /* Logo animation utilities */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes shine {
+    from {
+      mask-position: 150%;
+    }
+    to {
+      mask-position: -50%;
+    }
+  }
+  
+  .animate-shine {
+    animation: shine 2s linear forwards;
+    mask-image: linear-gradient(
+      -75deg,
+      rgba(0, 0, 0, 0.6) 30%,
+      #000 50%,
+      rgba(0, 0, 0, 0.6) 70%
+    );
+    mask-size: 200%;
   }
 }

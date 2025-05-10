@@ -8,6 +8,7 @@ import { useToast } from "@/components/ui/use-toast";
 import ChatMessage from "@/components/ChatMessage";
 import Sidebar from "@/components/Sidebar";
 import { useChat } from "@/hooks/useChat";
+import HeroLanding from "@/components/HeroLanding";
 
 const Index = () => {
   const {
@@ -24,6 +25,7 @@ const Index = () => {
   
   const [input, setInput] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [showLanding, setShowLanding] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
@@ -33,6 +35,15 @@ const Index = () => {
       inputRef.current.focus();
     }
   }, [currentChatId]);
+
+  // Hide landing page after animation completes
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLanding(false);
+    }, 4000); // Animation takes ~3.5s, give extra time
+
+    return () => clearTimeout(timer);
+  }, []);
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,6 +60,10 @@ const Index = () => {
       handleSubmit(e);
     }
   };
+
+  if (showLanding) {
+    return <HeroLanding />;
+  }
   
   return (
     <div className="flex h-screen overflow-hidden">
