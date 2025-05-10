@@ -187,7 +187,7 @@ const Index = () => {
             </Button>
           </form>
           <div className="text-xs text-muted-foreground text-center mt-2">
-            Powered by Groq + llama3-70b-8192
+            Powered by Aaryan
           </div>
         </div>
       </div>
