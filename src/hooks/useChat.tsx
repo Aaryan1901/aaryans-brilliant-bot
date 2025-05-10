@@ -1,7 +1,6 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { v4 as uuidv4 } from "uuid";
 
 interface Message {
   role: "user" | "assistant";
@@ -16,6 +15,11 @@ interface Chat {
 const MODEL = "llama3-70b-8192";
 const API_URL = "https://api.groq.com/openai/v1/chat/completions";
 
+// Simple function to generate a unique ID without relying on uuid
+const generateId = () => {
+  return Date.now().toString(36) + Math.random().toString(36).substring(2);
+};
+
 export const useChat = () => {
   const [apiKey, setApiKey] = useState<string | null>(localStorage.getItem("groq_api_key"));
   const [chats, setChats] = useState<Record<string, Chat>>(() => {
@@ -27,7 +31,7 @@ export const useChat = () => {
     if (savedChatId && chats[savedChatId]) {
       return savedChatId;
     }
-    const newChatId = uuidv4();
+    const newChatId = generateId();
     return newChatId;
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -67,7 +71,7 @@ export const useChat = () => {
   }, []);
 
   const createNewChat = useCallback(() => {
-    const newChatId = uuidv4();
+    const newChatId = generateId();
     setChats(prev => ({
       ...prev,
       [newChatId]: {
@@ -92,7 +96,7 @@ export const useChat = () => {
       
       // If we're deleting the current chat, create a new one
       if (chatId === currentChatId) {
-        const newChatId = uuidv4();
+        const newChatId = generateId();
         setCurrentChatId(newChatId);
         newChats[newChatId] = {
           id: newChatId,
