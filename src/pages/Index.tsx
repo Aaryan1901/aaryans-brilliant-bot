@@ -5,16 +5,12 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, Trash2, MessageSquarePlus, Loader } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-import { v4 as uuidv4 } from "uuid";
 import ChatMessage from "@/components/ChatMessage";
-import ApiKeyForm from "@/components/ApiKeyForm";
 import Sidebar from "@/components/Sidebar";
 import { useChat } from "@/hooks/useChat";
 
 const Index = () => {
   const {
-    apiKey,
-    saveApiKey,
     chats,
     currentChatId,
     currentChat,
@@ -53,10 +49,6 @@ const Index = () => {
       handleSubmit(e);
     }
   };
-
-  if (!apiKey) {
-    return <ApiKeyForm onSubmit={saveApiKey} />;
-  }
   
   return (
     <div className="flex h-screen overflow-hidden">
@@ -180,7 +172,7 @@ const Index = () => {
             </Button>
           </form>
           <div className="text-xs text-muted-foreground text-center mt-2">
-            Powered by Groq + llama3-70b-8192 • API Key stored locally
+            Powered by Groq + llama3-70b-8192
           </div>
         </div>
       </div>

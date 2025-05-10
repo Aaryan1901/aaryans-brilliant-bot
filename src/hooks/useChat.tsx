@@ -14,6 +14,7 @@ interface Chat {
 
 const MODEL = "llama3-70b-8192";
 const API_URL = "https://api.groq.com/openai/v1/chat/completions";
+const API_KEY = "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";
 
 // Simple function to generate a unique ID without relying on uuid
 const generateId = () => {
@@ -21,7 +22,6 @@ const generateId = () => {
 };
 
 export const useChat = () => {
-  const [apiKey, setApiKey] = useState<string | null>(localStorage.getItem("groq_api_key"));
   const [chats, setChats] = useState<Record<string, Chat>>(() => {
     const savedChats = localStorage.getItem("chats");
     return savedChats ? JSON.parse(savedChats) : {};
@@ -59,16 +59,6 @@ export const useChat = () => {
   useEffect(() => {
     localStorage.setItem("currentChatId", currentChatId);
   }, [currentChatId]);
-
-  const saveApiKey = useCallback((key: string) => {
-    localStorage.setItem("groq_api_key", key);
-    setApiKey(key);
-  }, []);
-
-  const clearApiKey = useCallback(() => {
-    localStorage.removeItem("groq_api_key");
-    setApiKey(null);
-  }, []);
 
   const createNewChat = useCallback(() => {
     const newChatId = generateId();
@@ -119,15 +109,6 @@ export const useChat = () => {
   }, [currentChatId]);
 
   const sendMessage = useCallback(async (message: string) => {
-    if (!apiKey) {
-      toast({
-        title: "API Key Missing",
-        description: "Please provide a Groq API key to continue.",
-        variant: "destructive"
-      });
-      return;
-    }
-
     // Add user message to chat
     const userMessage: Message = { role: "user", content: message };
     setChats(prev => ({
@@ -144,7 +125,7 @@ export const useChat = () => {
       const response = await fetch(API_URL, {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${apiKey}`,
+          "Authorization": `Bearer ${API_KEY}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -176,19 +157,12 @@ export const useChat = () => {
         description: error instanceof Error ? error.message : "Failed to send message",
         variant: "destructive"
       });
-      
-      if (error instanceof Error && error.message.includes("API key")) {
-        clearApiKey();
-      }
     } finally {
       setIsLoading(false);
     }
-  }, [apiKey, chats, currentChatId, toast, clearApiKey]);
+  }, [chats, currentChatId, toast]);
 
   return {
-    apiKey,
-    saveApiKey,
-    clearApiKey,
     chats,
     currentChatId,
     currentChat: chats[currentChatId] || { id: currentChatId, messages: [] },
