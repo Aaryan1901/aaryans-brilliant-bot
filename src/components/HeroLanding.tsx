@@ -28,7 +28,7 @@ const HeroLanding = () => {
             }`}
           >
             <img 
-              src="/lovable-uploads/41044aed-d4b3-4e2b-8437-2857bc4d8890.png" 
+              src="/lovable-uploads/e0613fbe-0668-4140-93c2-a6fc4bfcc7e1.png" 
               alt="Aaryan's Bot Logo" 
               className={`w-96 transition-all duration-1000 ${
                 animationState >= 2 ? "scale-100" : "scale-110"
