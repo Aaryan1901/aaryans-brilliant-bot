@@ -18,7 +18,7 @@ const HeroLanding = () => {
   }, []);
   
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-background to-background/80">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-background to-background/80 px-4">
       <div className="text-center">
         <div className="flex flex-col items-center justify-center relative">
           {/* Character Animation */}
@@ -30,7 +30,7 @@ const HeroLanding = () => {
             <img 
               src="/lovable-uploads/e0613fbe-0668-4140-93c2-a6fc4bfcc7e1.png" 
               alt="Aaryan's Bot Logo" 
-              className={`w-96 transition-all duration-1000 ${
+              className={`w-64 md:w-96 transition-all duration-1000 ${
                 animationState >= 2 ? "scale-100" : "scale-110"
               }`}
             />
@@ -42,7 +42,7 @@ const HeroLanding = () => {
               animationState >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <h1 className="text-5xl font-bold tracking-tight text-primary mb-4 relative overflow-hidden">
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-primary mb-4 relative overflow-hidden">
               <span className={`${animationState >= 3 ? 'animate-pulse' : ''}`}>
                 Welcome to Aaryan's SuperBot
               </span>
@@ -53,7 +53,7 @@ const HeroLanding = () => {
               ></span>
             </h1>
             
-            <p className={`text-xl text-primary-foreground/70 max-w-lg mx-auto transition-all duration-1000 delay-300 ${
+            <p className={`text-lg md:text-xl text-primary-foreground/70 max-w-lg mx-auto transition-all duration-1000 delay-300 ${
               animationState >= 3 ? "opacity-100" : "opacity-0"
             }`}>
               Your AI-powered assistant for intelligent conversations
