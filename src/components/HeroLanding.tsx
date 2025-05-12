@@ -18,7 +18,7 @@ const HeroLanding = () => {
   }, []);
   
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-background to-background/80 px-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-background to-background/80 px-4 sm:px-6">
       <div className="text-center">
         <div className="flex flex-col items-center justify-center relative">
           {/* Character Animation */}
@@ -30,7 +30,7 @@ const HeroLanding = () => {
             <img 
               src="/lovable-uploads/e0613fbe-0668-4140-93c2-a6fc4bfcc7e1.png" 
               alt="Aaryan's Bot Logo" 
-              className={`w-64 md:w-96 transition-all duration-1000 ${
+              className={`w-48 sm:w-64 md:w-80 transition-all duration-1000 ${
                 animationState >= 2 ? "scale-100" : "scale-110"
               }`}
             />
@@ -38,11 +38,11 @@ const HeroLanding = () => {
           
           {/* Text Animation */}
           <div 
-            className={`mt-6 transition-all duration-1000 transform ${
+            className={`mt-4 sm:mt-6 transition-all duration-1000 transform ${
               animationState >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-primary mb-4 relative overflow-hidden">
+            <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-primary mb-4 relative overflow-hidden">
               <span className={`${animationState >= 3 ? 'animate-pulse' : ''}`}>
                 Welcome to Aaryan's SuperBot
               </span>
@@ -53,7 +53,7 @@ const HeroLanding = () => {
               ></span>
             </h1>
             
-            <p className={`text-lg md:text-xl text-primary-foreground/70 max-w-lg mx-auto transition-all duration-1000 delay-300 ${
+            <p className={`text-base sm:text-lg md:text-xl text-primary-foreground/70 max-w-lg mx-auto transition-all duration-1000 delay-300 ${
               animationState >= 3 ? "opacity-100" : "opacity-0"
             }`}>
               Your AI-powered assistant for intelligent conversations
@@ -62,7 +62,7 @@ const HeroLanding = () => {
         </div>
         
         {/* Loading Indicator */}
-        <div className={`mt-8 transition-all duration-500 ${
+        <div className={`mt-6 sm:mt-8 transition-all duration-500 ${
           animationState >= 3 ? "opacity-100" : "opacity-0"
         }`}>
           <div className="flex justify-center items-center space-x-2">
@@ -70,7 +70,7 @@ const HeroLanding = () => {
             <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: "150ms" }}></div>
             <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: "300ms" }}></div>
           </div>
-          <p className="text-sm text-primary/80 mt-4">Loading your AI assistant...</p>
+          <p className="text-xs sm:text-sm text-primary/80 mt-3 sm:mt-4">Loading your AI assistant...</p>
         </div>
       </div>
     </div>
